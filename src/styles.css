@@ -1,0 +1,16 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.badge-notify {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: red;
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 7px;
+  border-radius: 50%;
+  transform: translateX(50%);
+}
