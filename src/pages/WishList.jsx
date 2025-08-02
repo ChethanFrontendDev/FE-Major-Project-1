@@ -11,7 +11,7 @@ export default function WishList() {
     `${baseUrl}/featuredCategories/products/`
   );
 
-  const { handleChangeBtn, message } = useHandleChangeBtn();
+  const { handleChangeBtn } = useHandleChangeBtn();
 
   const filteredWishListProduct = data?.filter(
     (product) => product.isAddedToWishlist === true
@@ -29,7 +29,6 @@ export default function WishList() {
             {!filteredWishListProduct?.length > 0 && (
               <p className="text-center">No Data Found.</p>
             )}
-            {message && <p className="text-center">{message}</p>}
             {filteredWishListProduct?.map((product) => (
               <div className="col-md-3 mb-3" key={product._id}>
                 <div className="position-relative">

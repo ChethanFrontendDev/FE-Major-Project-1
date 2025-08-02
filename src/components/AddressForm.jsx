@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useClothingDataContext from "../contexts/ClothingDataContext";
 import useFetch from "../useFetch";
 import Header from "./Header";
@@ -14,8 +15,6 @@ const AddressForm = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
-  const [editAddressMessage, setEditAddressMessage] = useState("");
-  const [addAddressMessage, setAddAddressMessage] = useState("");
 
   const editAdressById = data
     ?.flatMap((user) => user?.address)
@@ -61,11 +60,8 @@ const AddressForm = () => {
         })
         .then((data) => {
           console.log(data);
-          setEditAddressMessage("Address Updated.");
+          toast.success("Address Updated.");
           refetch();
-          setTimeout(() => {
-            setEditAddressMessage("");
-          }, 1000);
         })
         .catch((error) => {
           console.log(error);
@@ -82,12 +78,9 @@ const AddressForm = () => {
           response.json();
         })
         .then((data) => {
-          setAddAddressMessage("Address Added.");
+          toast.success("Address Added.");
           console.log(data);
           refetch();
-          setTimeout(() => {
-            setAddAddressMessage("");
-          }, 1000);
         })
         .catch((error) => {
           console.log(error);
@@ -181,12 +174,6 @@ const AddressForm = () => {
               Submit
             </button>
           </form>
-          {editAddressMessage && (
-            <p className="text-warning py-2">{editAddressMessage}</p>
-          )}
-          {addAddressMessage && (
-            <p className="text-success py-2">{addAddressMessage}</p>
-          )}
         </div>
       </div>
     </>

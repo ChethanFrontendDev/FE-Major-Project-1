@@ -17,7 +17,7 @@ export default function ProductDetails() {
     `${baseUrl}/featuredCategories/products/${selectedFeaturedCategory}/id/${selectedId}`
   );
 
-  const { handleChangeBtn, message } = useHandleChangeBtn();
+  const { handleChangeBtn } = useHandleChangeBtn();
 
   const productDetails = productList?.find((prod) => prod?._id === data?._id);
 
@@ -47,7 +47,6 @@ export default function ProductDetails() {
           {error && (
             <p className="text-center">Error while fetching the data.</p>
           )}
-          {message && <p className="text-center">{message}</p>}
           {data && (
             <div className="row">
               <div className="col-md-3">
@@ -68,7 +67,7 @@ export default function ProductDetails() {
                         quantity: productDetails?.quantity,
                         isAddedToCart: true,
                       },
-                      refetch
+                      refetch,
                     )
                   }
                 >
@@ -86,7 +85,7 @@ export default function ProductDetails() {
                         quantity: productDetails?.quantity,
                         isAddedToCart: true,
                       },
-                      refetch
+                      refetch,
                     )
                   }
                 />

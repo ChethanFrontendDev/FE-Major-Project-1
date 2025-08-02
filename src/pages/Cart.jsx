@@ -20,7 +20,7 @@ export default function Cart() {
     `${baseUrl}/featuredCategories/products`
   );
 
-  const { handleChangeBtn, message } = useHandleChangeBtn();
+  const { handleChangeBtn } = useHandleChangeBtn();
 
   const CartProduct = data?.filter((product) => product.isAddedToCart === true);
 
@@ -93,7 +93,6 @@ export default function Cart() {
           {!CartProduct?.length > 0 && (
             <p className="text-center">No Data Found.</p>
           )}
-          {message && <p className="text-center">{message}</p>}
           {CartProduct && CartProduct?.length > 0 && (
             <div className="row">
               <div className="col-md-7">

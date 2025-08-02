@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import AddNewAddressBtn from "../components/AddNewAddressBtn";
 import Header from "../components/Header";
@@ -10,7 +11,6 @@ export default function Checkout() {
   const { data, loading, error, refetch } = useFetch(`${baseUrl}/profile`);
 
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [deleting, setDeleting] = useState(false);
 
   const userAdressList = data?.flatMap((user) =>
     user?.address?.map((item) => ({
@@ -34,8 +34,6 @@ export default function Checkout() {
 
   const handleDelete = (addressId) => {
     if (addressId) {
-      setDeleting(true);
-
       fetch(`${baseUrl}/profile/user/${userId}/address/${addressId}`, {
         method: "DELETE",
         headers: {
@@ -43,22 +41,17 @@ export default function Checkout() {
         },
       })
         .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to delete address");
-          }
           return response.json();
         })
         .then((data) => {
           console.log(data);
           if (data.message) {
             refetch();
+            toast.error("Address deleted successfully!");
           }
         })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          setDeleting(false);
         });
     }
   };
@@ -74,9 +67,6 @@ export default function Checkout() {
       <div className="bg-light">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center">Error While Fetching Data.</p>}
-        {deleting && (
-          <p className="text-center text-danger">Address Deleted.</p>
-        )}
         <div className="container" style={{ padding: "30px 200px" }}>
           <div className="d-flex justify-content-between align-items-start pb-3">
             <h4>Select Address</h4>

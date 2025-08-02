@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { toast } from "react-toastify";
 
 const useHandleChangeBtn = () => {
-  const [message, setMessage] = useState("");
-
-  const handleChangeBtn = (url, productId, payload, refetch) => {
+  const handleChangeBtn = (url, productId, payload, refetch, silent=false) => {
     if (productId) {
       fetch(`${url}/${productId}`, {
         method: "POST",
@@ -18,33 +16,27 @@ const useHandleChangeBtn = () => {
         .then((data) => {
           console.log(data);
 
-          if (payload.isAddedToCart === true) {
-            setMessage("Added to Cart");
-          } else if (payload.isAddedToCart === false) {
-            setMessage("Removed from Cart");
-          } else if (payload.isAddedToWishlist === true) {
-            setMessage("Added to Wishlist");
-          } else if (payload.isAddedToWishlist === false) {
-            setMessage("Removed from Wishlist");
+          if (!silent) {
+            if (payload.isAddedToCart === true) {
+              toast.success("Added to Cart");
+            } else if (payload.isAddedToCart === false) {
+              toast.info("Removed from Cart");
+            } else if (payload.isAddedToWishlist === true) {
+              toast.success("Added to Wishlist");
+            } else if (payload.isAddedToWishlist === false) {
+              toast.info("Removed from Wishlist");
+            }
+            refetch();
           }
-
-          refetch();
-
-          setTimeout(() => {
-            setMessage("");
-          }, 1000);
         })
         .catch((error) => {
           console.log(error);
-          setMessage("Something Went Wrong!");
-          setTimeout(() => {
-            setMessage("");
-          }, 1000);
+          toast.error("Something Went Wrong!");
         });
     }
   };
 
-  return { handleChangeBtn, message };
+  return { handleChangeBtn };
 };
 
 export default useHandleChangeBtn;

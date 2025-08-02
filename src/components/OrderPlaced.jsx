@@ -48,7 +48,8 @@ const OrderPlaced = () => {
             selectedSize: "M",
             quantity: 1,
           },
-          refetch
+          refetch,
+          true
         );
       });
   };

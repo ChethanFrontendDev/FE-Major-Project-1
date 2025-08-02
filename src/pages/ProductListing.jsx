@@ -28,7 +28,7 @@ export default function ProductListing() {
     : `${baseUrl}/featuredCategories/products/${selectedfeaturedCategory}`;
   const { data, loading, error, refetch } = useFetch(url);
 
-  const { handleChangeBtn, message } = useHandleChangeBtn();
+  const { handleChangeBtn } = useHandleChangeBtn();
 
   const handleCategorySelection = (event) => {
     const { checked, value } = event.target;
@@ -123,7 +123,6 @@ export default function ProductListing() {
                 {error && (
                   <p className="text-center">Error While Fetching Data.</p>
                 )}
-                {message && <p className="text-center">{message}</p>}
                 {!filteredProducts?.length > 0 && (
                   <p className="text-center">No Data Found.</p>
                 )}
@@ -186,7 +185,7 @@ export default function ProductListing() {
                                 `${baseUrl}/featuredCategories/products/${selectedfeaturedCategory}`,
                                 product?._id,
                                 { isAddedToCart: true },
-                                refetch
+                                refetch,
                               );
                             }}
                           />
@@ -201,7 +200,7 @@ export default function ProductListing() {
                                   isAddedToWishlist:
                                     !product?.isAddedToWishlist,
                                 },
-                                refetch
+                                refetch,
                               )
                             }
                           />
