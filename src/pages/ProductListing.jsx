@@ -15,7 +15,7 @@ export default function ProductListing() {
   const featuredCategoryName = useParams();
   let selectedfeaturedCategory = featuredCategoryName.categoryName;
 
-  const { baseUrl, addToStore } = useClothingDataContext();
+  const { baseUrl, setInputValue } = useClothingDataContext();
 
   const [selectedSortOrder, setSelectedSortOrder] = useState();
   const [selectedRating, setSelectedRating] = useState();
@@ -41,7 +41,7 @@ export default function ProductListing() {
     }
   };
 
-  const filteredProducts = data
+  const filteredProducts = (data || [])
     ?.filter((product) => {
       const priceRangeMatched =
         selectedPriceRange === 0 ? true : product.price <= selectedPriceRange;
@@ -70,6 +70,8 @@ export default function ProductListing() {
     setSelectedCategory([]);
     setSelectedRating("");
     setSelectedSortOrder([]);
+    setInputValue("");
+    setSearchedData("");
   };
 
   return (
@@ -140,44 +142,45 @@ export default function ProductListing() {
                               width: "100%",
                               objectFit: "cover",
                             }}
-                            src={product.productUrl}
-                            alt={`${product.categoryName} image`}
+                            src={product?.productUrl}
+                            alt={`${product?.categoryName} image`}
                           />
                         </div>
                         <div className="col-md-6">
                           <Link
-                            to={`/products/${product.featuredCategory}/${product.productName}/details/${product._id}`}
+                            to={`/products/${product?.featuredCategory}/${product?.productName}/details/${product?._id}`}
                             className="nav-link"
                           >
                             <p>
-                              <strong>{product.productName}</strong> <br />
+                              <strong>{product?.productName}</strong> <br />
                               <small>
                                 <span className="text-secondary">
-                                  {product.rating} rating |
+                                  {product?.rating} rating |
                                 </span>{" "}
                                 <span className="text-warning">
-                                  {"★".repeat(product.rating)}
+                                  {"★".repeat(product?.rating)}
                                 </span>
                               </small>
                             </p>
                             <h6>
                               <span>
                                 ₹
-                                {product.price -
-                                  (product.price * product.discountRate) / 100}
+                                {product?.price -
+                                  (product?.price * product?.discountRate) /
+                                    100}
                               </span>{" "}
                               <small className="text-secondary text-decoration-line-through">
-                                {product.price}
+                                {product?.price}
                               </small>
                             </h6>
                             <p className="text-success">
-                              {product.discountRate}% Discount
+                              {product?.discountRate}% Discount
                             </p>
                           </Link>
 
                           <AddToCartButton
                             navigateTo={"/products/cart"}
-                            isAddedToCart={product.isAddedToCart}
+                            isAddedToCart={product?.isAddedToCart}
                             handleAddToCartBtn={() => {
                               handleChangeBtn(
                                 `${baseUrl}/featuredCategories/products/${selectedfeaturedCategory}`,
@@ -189,13 +192,14 @@ export default function ProductListing() {
                           />
 
                           <WishListButton
-                            isAddedToWishlist={product.isAddedToWishlist}
+                            isAddedToWishlist={product?.isAddedToWishlist}
                             handleToggleWishlistBtn={() =>
                               handleChangeBtn(
                                 `${baseUrl}/featuredCategories/products/${selectedfeaturedCategory}`,
                                 product?._id,
                                 {
-                                  isAddedToWishlist: !product.isAddedToWishlist,
+                                  isAddedToWishlist:
+                                    !product?.isAddedToWishlist,
                                 },
                                 refetch
                               )

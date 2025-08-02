@@ -16,6 +16,7 @@ export function ClothingDataContextProvider({ children }) {
   );
 
   const deliveryCharges = 499;
+  const [inputValue, setInputValue] = useState("");
   const [formStatus, setFormStatus] = useState(null);
   const [editFormById, setEditFormById] = useState(null);
   const [addedToCheckout, setAddedToCheckout] = useState();
@@ -55,6 +56,8 @@ export function ClothingDataContextProvider({ children }) {
   return (
     <ClothingDataContext.Provider
       value={{
+        inputValue,
+        setInputValue,
         handleDecrement,
         handleIncrement,
         deliveryCharges,

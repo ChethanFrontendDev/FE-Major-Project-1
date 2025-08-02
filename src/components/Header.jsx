@@ -3,12 +3,10 @@ import { NavLink } from "react-router-dom";
 import useClothingDataContext from "../contexts/ClothingDataContext";
 import useFetch from "../useFetch";
 const Header = ({ isVisible, onSearch }) => {
-  const { baseUrl } = useClothingDataContext();
+  const { baseUrl, inputValue, setInputValue } = useClothingDataContext();
 
   const { data, refetch } = useFetch(`${baseUrl}/featuredCategories/products/`);
   const { data: userDetails } = useFetch(`${baseUrl}/profile`);
-
-  const [inputValue, setInputValue] = useState("");
 
   const handleInputValueChange = (event) => {
     setInputValue(event.target.value);
