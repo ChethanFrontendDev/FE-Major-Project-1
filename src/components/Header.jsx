@@ -14,7 +14,7 @@ const Header = ({ isVisible, onSearch }) => {
 
   const handleSearchBtn = () => {
     onSearch(inputValue);
-    setInputValue("");
+    // setInputValue("");
   };
 
   const profilePicture = userDetails?.map((item) => item.profilePictureUrl);
