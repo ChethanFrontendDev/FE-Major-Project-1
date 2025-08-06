@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import useClothingDataContext from "../contexts/ClothingDataContext";
 import useHandleChangeBtn from "../useHandleChangeBtn";
 import Header from "./Header";
-import OrderList from "./OrderList";
 
 const OrderPlaced = () => {
   const { addedToCheckout, baseUrl, refetch } = useClothingDataContext();
@@ -71,13 +70,59 @@ const OrderPlaced = () => {
 
       <div style={{ margin: "0px 100px" }}>
         <div className="container py-5 bg-light">
+          {(!ordered?.items?.products ||
+            ordered.items.products.length === 0) && (
+            <p className="text-center">No data to show.</p>
+          )}
           {addedToCheckout && (
             <>
               <h3 className="text-center text-secondary">
                 Order Placed Successfully.
               </h3>
               <p className="text-center pt-3">Order Summary</p>
-              <OrderList />
+
+              <div style={{ margin: "0px 100px" }}>
+                <ul className="list-group">
+                  {(ordered?.items?.products || []).map((product) => (
+                    <li
+                      className="list-group-item d-flex justify-content-between align-items-center"
+                      key={product._id}
+                    >
+                      <span className="col-md-9">{product.productName}</span>
+                      <span className="col-md-1">{product.quantity}</span>
+                      <span className="col-md-1">x</span>
+                      <span className="col-md-1">
+                        ₹{product.quantity * product.price}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                {ordered?.items?.products?.length > 0 && (
+                  <div className="px-3 py-3 text-secondary">
+                    <span className="d-flex justify-content-between align-items-center">
+                      <span>Total Price</span>
+                      <span>₹{ordered?.items?.totalItemPrice}</span>
+                    </span>
+
+                    <span className="d-flex justify-content-between align-items-center">
+                      <span>Total Discount </span>
+                      <span>-{ordered?.items?.totalItemDiscount}</span>
+                    </span>
+
+                    <span className="d-flex justify-content-between align-items-center">
+                      <span>Delivery Charges </span>
+                      <span>+{ordered?.items?.deliveryCharges}</span>
+                    </span>
+
+                    <hr />
+
+                    <p className="d-flex justify-content-between align-items-center text-dark">
+                      <span>Total Cart Value</span>
+                      <span>₹{ordered?.items?.totalCartValue}</span>
+                    </p>
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>
