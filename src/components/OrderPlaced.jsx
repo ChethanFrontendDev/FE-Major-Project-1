@@ -15,12 +15,20 @@ const OrderPlaced = () => {
   const [ordered, setOrderes] = useState(null);
 
   const handleSaveOrder = () => {
+    const payload = {
+      products: ordered?.items?.products,
+      address: ordered.address,
+      deliveryCharges: ordered.items?.deliveryCharges,
+      totalCartValue: ordered.items?.totalCartValue,
+      totalItemDiscount: ordered.items?.totalItemDiscount,
+      totalItemPrice: ordered.items?.totalItemPrice,
+    };
     fetch(`${baseUrl}/featuredCategories/placedOrders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(ordered),
+      body: JSON.stringify(payload),
     })
       .then((response) => {
         return response.json();
