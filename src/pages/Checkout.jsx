@@ -64,72 +64,84 @@ export default function Checkout() {
   return (
     <>
       <Header />
-      <div className="bg-light">
+      <div className="bg-light py-4">
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-center">Error While Fetching Data.</p>}
-        <div className="container" style={{ padding: "30px 200px" }}>
-          <div className="d-flex justify-content-between align-items-start pb-3">
-            <h4>Select Address</h4>
-            {selectedAddress ? (
-              <Link
-                to="/products/cart/checkout/order-placed"
-                state={{ address: selectedAddress }}
-                className="btn btn-primary"
-              >
-                Place Your Order
-              </Link>
-            ) : (
-              <button className="btn btn-primary" disabled>
-                Place Your Order
-              </button>
-            )}
-          </div>
-          {userAdressList?.map((product, index) => (
-            <div className="col-md-12 mb-3" key={index}>
-              <div className="card">
-                <div className="card-body">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="selectedAddress"
-                      id={`address-${product?.id}`}
-                      checked={selectedAddress?.id === product?.id}
-                      onChange={() => handleAddress(product?.id)}
-                    />
-                    <div className="text-end">
-                      <Link
-                        to="/products/cart/checkout/adress-form"
-                        onClick={() => handleEdit(product?.id)}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <i className="bi bi-pen"></i>
-                      </Link>
-                      <span
-                        onClick={() => handleDelete(product?.id)}
-                        style={{ cursor: "pointer" }}
-                      >
-                        <i className="bi bi-trash text-danger ms-3"></i>
-                      </span>
-                    </div>
-                    <label
-                      className="form-check-label"
-                      htmlFor={`address-${product?.id}`}
-                    >
-                      <h6 className="card-title">{product?.fullName}</h6>
 
-                      <span>
-                        {product?.addressLine} - {product?.zipCode} <br />
-                        {product?.landMark}
-                      </span>
-                    </label>
+        <div className="container">
+          <div className="row justify-content-between align-items-start pb-3">
+            <div className="col-12 col-md-6">
+              <h4>Select Address</h4>
+            </div>
+            <div className="col-12 col-md-6 text-md-end mt-3 mt-md-0">
+              {selectedAddress ? (
+                <Link
+                  to="/products/cart/checkout/order-placed"
+                  state={{ address: selectedAddress }}
+                  className="btn btn-primary"
+                >
+                  Place Your Order
+                </Link>
+              ) : (
+                <button className="btn btn-primary" disabled>
+                  Place Your Order
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="row">
+            {userAdressList?.map((product, index) => (
+              <div className="col-12 mb-3" key={index}>
+                <div className="card h-100">
+                  <div className="card-body">
+                    <div className="form-check d-flex flex-column flex-sm-row justify-content-between align-items-start">
+                      <div>
+                        <input
+                          className="form-check-input me-2"
+                          type="radio"
+                          name="selectedAddress"
+                          id={`address-${product?.id}`}
+                          checked={selectedAddress?.id === product?.id}
+                          onChange={() => handleAddress(product?.id)}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor={`address-${product?.id}`}
+                        >
+                          <h6 className="card-title">{product?.fullName}</h6>
+                          <p className="mb-1">
+                            {product?.addressLine} - {product?.zipCode}
+                          </p>
+                          <small>{product?.landMark}</small>
+                        </label>
+                      </div>
+
+                      <div className="text-end mt-3 mt-sm-0">
+                        <Link
+                          to="/products/cart/checkout/adress-form"
+                          onClick={() => handleEdit(product?.id)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <i className="bi bi-pen"></i>
+                        </Link>
+                        <span
+                          onClick={() => handleDelete(product?.id)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <i className="bi bi-trash text-danger ms-3"></i>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
 
-          <AddNewAddressBtn />
+          <div className="pt-3">
+            <AddNewAddressBtn />
+          </div>
         </div>
       </div>
     </>

@@ -27,56 +27,59 @@ const OrderList = () => {
   );
 
   return (
-    <div style={{ margin: "0px 100px" }}>
-      <ul className="list-group">
-        {!data && <p className="text-center">No data to show.</p>}
-        {data?.flatMap((item) =>
-          item.products.map((product) => {
-            return (
-              <li
-                className="list-group-item d-flex justify-content-between align-items-center"
-                key={product._id}
-              >
-                <span className="col-md-9"> {product.productName} </span>
-                <span className="col-md-1">{product.quantity}</span>
-                <span className="col-md-1">x</span>
-                <span className="col-md-1">
-                  ₹{product.quantity * product.price}
-                </span>
-              </li>
-            );
-          })
-        )}
-      </ul>
-      {data?.length > 0 && (
-        <div className="px-3 py-3 text-secondary">
-          {totalItemPrice && (
-            <span className="d-flex justify-content-between align-items-center">
-              <span>Total Price</span>
-              <span>₹{totalItemPrice}</span>
-            </span>
-          )}
-          {totalItemDiscount && (
-            <span className="d-flex justify-content-between align-items-center">
-              <span>Total Discount </span>
-              <span>-{totalItemDiscount}</span>
-            </span>
-          )}
-          {deliveryCharges && (
-            <span className="d-flex justify-content-between align-items-center">
-              <span>Delivery Charges </span>
-              <span>+{deliveryCharges}</span>
-            </span>
-          )}
-          <hr />
-          {totalCartValue && (
-            <p className="d-flex justify-content-between align-items-center text-dark">
-              <span>Total Cart Value</span>
-              <span>₹{totalCartValue}</span>
-            </p>
+    <div className="container my-4">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-10 col-lg-8">
+          <ul className="list-group">
+            {!data && <p className="text-center">No data to show.</p>}
+            {data?.flatMap((item) =>
+              item.products.map((product) => (
+                <li
+                  className="list-group-item d-flex flex-wrap justify-content-between align-items-center"
+                  key={product._id}
+                >
+                  <span className="flex-grow-1">{product.productName}</span>
+                  <span className="mx-2">{product.quantity}</span>
+                  <span className="mx-2">x</span>
+                  <span className="mx-2">
+                    ₹{product.quantity * product.price}
+                  </span>
+                </li>
+              ))
+            )}
+          </ul>
+
+          {data?.length > 0 && (
+            <div className="px-3 py-3 text-secondary">
+              {totalItemPrice && (
+                <div className="d-flex justify-content-between">
+                  <span>Total Price</span>
+                  <span>₹{totalItemPrice}</span>
+                </div>
+              )}
+              {totalItemDiscount && (
+                <div className="d-flex justify-content-between">
+                  <span>Total Discount</span>
+                  <span>-{totalItemDiscount}</span>
+                </div>
+              )}
+              {deliveryCharges && (
+                <div className="d-flex justify-content-between">
+                  <span>Delivery Charges</span>
+                  <span>+{deliveryCharges}</span>
+                </div>
+              )}
+              <hr />
+              {totalCartValue && (
+                <div className="d-flex justify-content-between text-dark">
+                  <strong>Total Cart Value</strong>
+                  <strong>₹{totalCartValue}</strong>
+                </div>
+              )}
+            </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

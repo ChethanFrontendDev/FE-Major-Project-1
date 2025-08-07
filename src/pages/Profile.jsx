@@ -15,22 +15,27 @@ export default function Profile() {
         <div className="container py-3">
           {loading && <p className="text-center">Loading...</p>}
           {error && <p className="text-center">Error while fetching Data.</p>}
-          {!data?.length > 0 && <p className="text-center">No Data Found.</p>}
+          {!data?.length && <p className="text-center">No Data Found.</p>}
+
           {data?.map((user) => (
-            <div className="row align-items-center" key={user?._id}>
-              <div className="col-md-3">
+            <div
+              className="row justify-content-center align-items-center mb-5"
+              key={user?._id}
+            >
+              <div className="col-12 col-md-3 d-flex justify-content-center mb-3 mb-md-0">
                 <img
                   style={{
                     height: "150px",
                     width: "150px",
                     objectFit: "cover",
                   }}
-                  className="rounded-circle"
+                  className="rounded-circle img-fluid"
                   src={user.profilePictureUrl}
                   alt="profile picture"
                 />
               </div>
-              <div className="col-md-9">
+
+              <div className="col-12 col-md-9 d-flex flex-column align-items-center align-items-md-start">
                 <h5>
                   Username:{" "}
                   <span className="fw-normal text-secondary fs-6">
@@ -52,9 +57,11 @@ export default function Profile() {
                 <h5>
                   Address:{" "}
                   <span className="fw-normal text-secondary fs-6">
-                    {user?.address[0].addressLine} - {user?.address[0].zipCode}
+                    {user?.address[0]?.addressLine} -{" "}
+                    {user?.address[0]?.zipCode}
                   </span>
                 </h5>
+
                 <div className="py-3">
                   <AddNewAddressBtn />
                 </div>

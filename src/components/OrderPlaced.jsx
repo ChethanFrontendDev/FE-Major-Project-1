@@ -76,12 +76,13 @@ const OrderPlaced = () => {
     <div className="container">
       <Header />
 
-      <div style={{ margin: "0px 100px" }}>
-        <div className="container py-5 bg-light">
+      <div className="py-4">
+        <div className="container bg-light p-4 p-md-5 rounded">
           {(!ordered?.items?.products ||
             ordered.items.products.length === 0) && (
             <p className="text-center">No data to show.</p>
           )}
+
           {addedToCheckout && (
             <>
               <h3 className="text-center text-secondary">
@@ -89,47 +90,46 @@ const OrderPlaced = () => {
               </h3>
               <p className="text-center pt-3">Order Summary</p>
 
-              <div style={{ margin: "0px 100px" }}>
-                <ul className="list-group">
-                  {(ordered?.items?.products || []).map((product) => (
-                    <li
-                      className="list-group-item d-flex justify-content-between align-items-center"
-                      key={product._id}
-                    >
-                      <span className="col-md-9">{product.productName}</span>
-                      <span className="col-md-1">{product.quantity}</span>
-                      <span className="col-md-1">x</span>
-                      <span className="col-md-1">
-                        ₹{product.quantity * product.price}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                {ordered?.items?.products?.length > 0 && (
-                  <div className="px-3 py-3 text-secondary">
-                    <span className="d-flex justify-content-between align-items-center">
-                      <span>Total Price</span>
-                      <span>₹{ordered?.items?.totalItemPrice}</span>
-                    </span>
+              <div className="row justify-content-center">
+                <div className="col-12 col-md-10">
+                  <ul className="list-group">
+                    {(ordered?.items?.products || []).map((product) => (
+                      <li
+                        key={product._id}
+                        className="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center"
+                      >
+                        <span className="fw-medium">{product.productName}</span>
+                        <div className="d-flex gap-2">
+                          <span>{product.quantity}</span>
+                          <span>x</span>
+                          <span>₹{product.quantity * product.price}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
 
-                    <span className="d-flex justify-content-between align-items-center">
-                      <span>Total Discount </span>
-                      <span>-{ordered?.items?.totalItemDiscount}</span>
-                    </span>
-
-                    <span className="d-flex justify-content-between align-items-center">
-                      <span>Delivery Charges </span>
-                      <span>+{ordered?.items?.deliveryCharges}</span>
-                    </span>
-
-                    <hr />
-
-                    <p className="d-flex justify-content-between align-items-center text-dark">
-                      <span>Total Cart Value</span>
-                      <span>₹{ordered?.items?.totalCartValue}</span>
-                    </p>
-                  </div>
-                )}
+                  {ordered?.items?.products?.length > 0 && (
+                    <div className="text-secondary mt-4">
+                      <div className="d-flex justify-content-between py-1">
+                        <span>Total Price</span>
+                        <span>₹{ordered?.items?.totalItemPrice}</span>
+                      </div>
+                      <div className="d-flex justify-content-between py-1">
+                        <span>Total Discount</span>
+                        <span>-₹{ordered?.items?.totalItemDiscount}</span>
+                      </div>
+                      <div className="d-flex justify-content-between py-1">
+                        <span>Delivery Charges</span>
+                        <span>+₹{ordered?.items?.deliveryCharges}</span>
+                      </div>
+                      <hr />
+                      <div className="d-flex justify-content-between py-1 text-dark fw-bold">
+                        <span>Total Cart Value</span>
+                        <span>₹{ordered?.items?.totalCartValue}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </>
           )}
