@@ -90,58 +90,63 @@ export default function Cart() {
         <div className="container" style={{ padding: "0px 50px" }}>
           {loading && <p className="text-center">Loading...</p>}
           {error && <p className="text-center">Error While Fetching data.</p>}
-          {!CartProduct?.length > 0 && (
+          {!CartProduct?.length && (
             <p className="text-center">No Data Found.</p>
           )}
-          {CartProduct && CartProduct?.length > 0 && (
+          {CartProduct && CartProduct.length > 0 && (
             <div className="row">
               <div className="col-md-7">
-                {CartProduct?.map((product) => (
-                  <div className="row mb-4" key={product._id}>
-                    <div className="col-md-5">
-                      <img
-                        style={{ height: "17.5rem", width: "16rem" }}
-                        className="object-fit-cover"
-                        src={product.productUrl}
-                        alt={`${product.productName} image`}
-                      />
-                    </div>
-                    <div
-                      className="col-md-7 py-3"
-                      style={{ backgroundColor: "white" }}
-                    >
-                      <CartHeader productDetails={product} canRender={false} />
-                      <button
-                        onClick={() =>
-                          handleChangeBtn(
-                            `${baseUrl}/featuredCategories/products/${selectedFeaturedCategory}`,
-                            product?._id,
-                            {
-                              isAddedToCart: false,
-                              selectedSize: "M",
-                              quantity: 1,
-                            },
-                            refetch
-                          )
-                        }
-                        className="btn btn-secondary w-100"
-                      >
-                        Remove From Cart
-                      </button>
-                      <div className="mt-3">
-                        <WishListButton
-                          isAddedToWishlist={product.isAddedToWishlist}
-                          handleToggleWishlistBtn={() =>
-                            handleChangeBtn(
-                              `${baseUrl}/featuredCategories/products/${selectedFeaturedCategory}`,
-                              product?._id,
-                              {
-                                isAddedToWishlist: !product.isAddedToWishlist,
-                              },
-                              refetch
-                            )
-                          }
+                {CartProduct.map((product) => (
+                  <div className="card mb-4" key={product._id}>
+                    <div className="row g-0">
+                      <div className="col-md-5">
+                        <img
+                          src={product.productUrl}
+                          alt={`${product.productName} image`}
+                          className="img-fluid h-100 object-fit-cover w-100"
+                          style={{ maxHeight: "17.5rem", objectFit: "cover" }}
                         />
+                      </div>
+                      <div className="col-md-7">
+                        <div className="card-body">
+                          <CartHeader
+                            productDetails={product}
+                            canRender={false}
+                          />
+                          <button
+                            onClick={() =>
+                              handleChangeBtn(
+                                `${baseUrl}/featuredCategories/products/${selectedFeaturedCategory}`,
+                                product._id,
+                                {
+                                  isAddedToCart: false,
+                                  selectedSize: "M",
+                                  quantity: 1,
+                                },
+                                refetch
+                              )
+                            }
+                            className="btn btn-secondary w-100 mt-2"
+                          >
+                            Remove From Cart
+                          </button>
+                          <div className="mt-3">
+                            <WishListButton
+                              isAddedToWishlist={product.isAddedToWishlist}
+                              handleToggleWishlistBtn={() =>
+                                handleChangeBtn(
+                                  `${baseUrl}/featuredCategories/products/${selectedFeaturedCategory}`,
+                                  product._id,
+                                  {
+                                    isAddedToWishlist:
+                                      !product.isAddedToWishlist,
+                                  },
+                                  refetch
+                                )
+                              }
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -157,33 +162,35 @@ export default function Cart() {
                       <small>Price ({getAddedToCartItemsCount} items)</small>
                       <small>₹{getItemPrice}</small>
                     </span>
+
                     {cartItems?.map((item, index) => (
                       <small
                         key={index}
                         className="d-flex justify-content-between pt-1"
                       >
                         <small className="text-secondary">
-                          Item {index + 1}: {item.price} x {item.quantity}{" "}
+                          Item {index + 1}: {item.price} x {item.quantity}
                           <br />
                         </small>
                         <small className="text-secondary">
-                          {" "}
-                          {item.price * item.quantity}{" "}
+                          {item.price * item.quantity}
                         </small>
                         <small className="text-secondary">
-                          {" "}
                           -
                           {(item.price -
                             item.price * (item.discountRate / 100)) *
-                            item.quantity}{" "}
+                            item.quantity}
                         </small>
                       </small>
                     ))}
+
                     <br />
+
                     <span className="d-flex justify-content-between">
                       <small>Discount</small>
                       <small>-{getTotalDiscountedAmount}</small>
                     </span>
+
                     <span className="d-flex justify-content-between">
                       <small>Delivery Charges</small>
                       <small>
@@ -192,15 +199,19 @@ export default function Cart() {
                           : "Free Delivery"}
                       </small>
                     </span>
+
                     <hr />
+
                     <span className="d-flex justify-content-between">
                       <small className="fw-medium">TOTAL AMOUNT</small>
                       <small>₹{getFinalCartPrice}</small>
                     </span>
+
                     <hr />
                     <small>
                       You will save ₹{getTotalDiscountedAmount} on this order
                     </small>
+
                     <Link
                       to="/products/cart/checkout"
                       className="btn btn-primary w-100 mt-3"

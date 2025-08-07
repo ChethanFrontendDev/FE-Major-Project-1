@@ -179,7 +179,7 @@ export default function ProductListing() {
                             </Link>
                           </div>
 
-                          <div className="d-flex gap-2 flex-wrap">
+                          <div className="d-flex flex-wrap align-items-center  gap-2">
                             <AddToCartButton
                               navigateTo={"/products/cart"}
                               isAddedToCart={product?.isAddedToCart}

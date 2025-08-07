@@ -35,33 +35,34 @@ export default function Profile() {
                 />
               </div>
 
-              <div className="col-12 col-md-9 d-flex flex-column align-items-center align-items-md-start">
-                <h5>
-                  Username:{" "}
-                  <span className="fw-normal text-secondary fs-6">
-                    {user.name}
-                  </span>
-                </h5>
-                <h5>
-                  Email:{" "}
-                  <span className="fw-normal text-secondary fs-6">
-                    {user.email}
-                  </span>
-                </h5>
-                <h5>
-                  Phone:{" "}
-                  <span className="fw-normal text-secondary fs-6">
-                    {user.phone}
-                  </span>
-                </h5>
-                <h5>
-                  Address:{" "}
-                  <span className="fw-normal text-secondary fs-6">
-                    {user?.address[0]?.addressLine} -{" "}
-                    {user?.address[0]?.zipCode}
-                  </span>
-                </h5>
-
+              <div className="col-12 col-md-9 d-flex flex-column">
+                <div>
+                  <h5>
+                    Username:{" "}
+                    <span className="fw-normal text-secondary fs-6">
+                      {user.name}
+                    </span>
+                  </h5>
+                  <h5>
+                    Email:{" "}
+                    <span className="fw-normal text-secondary fs-6">
+                      {user.email}
+                    </span>
+                  </h5>
+                  <h5>
+                    Phone:{" "}
+                    <span className="fw-normal text-secondary fs-6">
+                      {user.phone}
+                    </span>
+                  </h5>
+                  <h5>
+                    Address:{" "}
+                    <span className="fw-normal text-secondary fs-6">
+                      {user?.address[0]?.addressLine} -{" "}
+                      {user?.address[0]?.zipCode}
+                    </span>
+                  </h5>
+                </div>
                 <div className="py-3">
                   <AddNewAddressBtn />
                 </div>
