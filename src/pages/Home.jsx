@@ -39,31 +39,32 @@ export default function Home() {
   return (
     <>
       <Header />
+
       <div className="bg-light py-3">
         <div className="container">
           <div className="row">
             {loading && <p className="text-center">Loading...</p>}
             {error && (
-              <p className="text-center">Error Occured While Fetching Data.</p>
+              <p className="text-center">Error Occurred While Fetching Data.</p>
             )}
             {data?.map((category) => (
-              <div key={category._id} className="col-md-3">
+              <div
+                key={category._id}
+                className="col-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center"
+              >
                 <NavLink
                   onClick={() => setSelectedFeaturedCategory(category?.name)}
-                  className="nav-link"
+                  className="nav-link w-100"
                   to={`/products/${category.name}`}
                 >
-                  <div
-                    className="card mb-3"
-                    style={{ width: "15rem", height: "19rem" }}
-                  >
+                  <div className="card h-100">
                     <img
                       style={{ height: "16rem", objectFit: "cover" }}
-                      className="card-img-top img-fluid"
+                      className="card-img-top"
                       src={category.imgUrl}
                       alt={`${category.name} image`}
                     />
-                    <div className="card-body">
+                    <div className="card-body text-center">
                       <h5 className="card-title">{category.name}</h5>
                     </div>
                   </div>
@@ -81,12 +82,15 @@ export default function Home() {
               data-bs-interval="2000"
             >
               <div className="carousel-inner" style={{ height: "30rem" }}>
-                {featuredImagesList.map((feature) => (
-                  <div key={feature.id} className="carousel-item active">
+                {featuredImagesList.map((feature, index) => (
+                  <div
+                    key={feature.id}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  >
                     <img
                       src={feature.imageUrl}
-                      className="d-block img-fluid w-100"
-                      style={{ height: "30rem", objectFit: "cover" }}
+                      className="d-block w-100 h-100 img-fluid"
+                      style={{ objectFit: "cover" }}
                       alt={`${feature.name} image`}
                     />
                   </div>
@@ -119,45 +123,36 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="py-4 row justify-content-between mx-0">
-            <div className="col-md-5 bg-secondary p-4 mb-3">
-              <div className="row">
-                <img
-                  className="col-md-4"
-                  src="https://plus.unsplash.com/premium_photo-1675186049366-64a655f8f537?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt=""
-                />
-                <div className="col-md-8 d-flex flex-column justify-content-between p-3">
-                  <h6>New Arrivals</h6>
-                  <p>
-                    <strong>Summer Collection</strong> <br />
-                    <small>
-                      Check out our best summer collection to stay cool in style
-                      this season
-                    </small>
-                  </p>
+          <div className="py-4 row gx-3 gy-3">
+            {[1, 2].map((_, index) => (
+              <div key={index} className="col-12 col-md-6">
+                <div className="bg-secondary p-3 h-100 text-white rounded">
+                  <div className="row g-2 align-items-center">
+                    <div className="col-4">
+                      <img
+                        className="img-fluid rounded"
+                        src={
+                          index === 0
+                            ? "https://plus.unsplash.com/premium_photo-1675186049366-64a655f8f537?q=80&w=387&auto=format&fit=crop"
+                            : "https://plus.unsplash.com/premium_photo-1705554519869-fdcebc4ba94b?q=80&w=387&auto=format&fit=crop"
+                        }
+                        alt={`Feature ${index + 1}`}
+                      />
+                    </div>
+                    <div className="col-8">
+                      <h6>New Arrivals</h6>
+                      <p className="mb-0">
+                        <strong>Summer Collection</strong> <br />
+                        <small>
+                          Check out our best summer collection to stay cool in
+                          style this season.
+                        </small>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-5  bg-secondary p-4 mb-3">
-              <div className="row">
-                <img
-                  className="col-md-4"
-                  src="https://plus.unsplash.com/premium_photo-1705554519869-fdcebc4ba94b?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt=""
-                />
-                <div className="col-md-8 d-flex flex-column justify-content-between p-3">
-                  <h6>New Arrivals</h6>
-                  <p>
-                    <strong>Summer Collection</strong> <br />
-                    <small>
-                      Check out our best summer collection to stay cool in style
-                      this season
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
