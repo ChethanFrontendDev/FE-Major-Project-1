@@ -100,3 +100,102 @@ Watch a walkthrough (4-5 minutes) of all the major features of this app:
 
 ## API Reference
 
+### **GET /api/products**<br>
+
+Retrieve a list of all products.<br>
+
+Sample Response:<br>
+
+```
+[{featuredCategory, categoryName, productName, }, ....]
+```
+
+### **GET api/products/featuredCategory**<br>
+
+Retrieve a list of products grouped by their featured category.<br>
+
+Sample Response:<br>
+
+```
+[{productName, productUrl, rating, quantity, discountRate, numberOfReturnableDays}, ....]
+```
+
+### **GET api/products/featuredCategory/:id**<br>
+
+Retrieve details of a single product by its ID.<br>
+
+Sample Response:<br>
+
+```
+[{productName, productUrl, rating, quantity, discountRate, numberOfReturnableDays}, ....]
+```
+
+### **POST api/products/featuredCategory/:id**<br>
+
+Update specific product fields<br>
+
+Sample Response:<br>
+
+```
+{selectedSize, quantity, isAddedToCart,}
+```
+
+### **GET api/profile**<br>
+
+Retrieve user profile details.<br>
+
+Sample Response:<br>
+
+```
+[{address:[....], email, name, phone, profilePictureUrl}]
+```
+
+### **POST api/profile/user/:id/address**<br>
+
+Add a new address to the user profile.<br>
+
+Sample Response:<br>
+
+```
+{addressLine, fullName, landMark, phoneNumber, zipCode,}
+```
+
+### **POST api/profile/user/:id/address/:id**<br>
+
+Update an existing address.<br>
+
+Sample Response:<br>
+
+```
+{addressLine, fullName, landMark, phoneNumber, zipCode,}
+```
+
+### **DELETE api/profile/user/:id/address/:id**<br>
+
+Delete a user address.<br>
+
+Sample Response:<br>
+
+```
+message: "address deleted successfully."
+```
+
+### **POST api/featuredCategories/placedOrders**<br>
+
+Create or update order details.<br>
+
+Sample Response:<br>
+
+```
+{products:[....], address:{....}, products:[], deliveryCharges, totalCartValue, ....}
+```
+---
+
+## Contact
+
+For bugs or feature request, please reach out to chethankumar.dev@gmail.com
+
+
+
+
+
