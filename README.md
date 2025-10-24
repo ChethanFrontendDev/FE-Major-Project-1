@@ -33,6 +33,7 @@ npm run dev  # or `npm start` / `yarn dev`
 
 - React JS
 - React Router
+- Bootstrap
 - Node JS
 - Express
 - MongoDB
@@ -43,7 +44,7 @@ npm run dev  # or `npm start` / `yarn dev`
 ## Demo Video
 
 Watch a walkthrough (4-5 minutes) of all the major features of this app:
-[Loom Video](link)
+[Loom Video](https://drive.google.com/file/d/1iCxBhtq0YNcthXIcKQ5WHYpfcSYWyYlr/view?usp=sharing)
 
 ---
 
