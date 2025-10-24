@@ -3,9 +3,11 @@
 A full-stack e-commerce clothing website built with modern web technologies. It features a responsive design, dynamic product management, and advanced filters for effortless product discovery. Designed to provide an intuitive and visually appealing shopping experience.
 
 ---
+
 ## Demo Link
 
 [Live Demo](https://fe-major-project-1.vercel.app/)
+
 ---
 
 ## Quick Start
@@ -24,6 +26,7 @@ npm install
 npm run dev  # or `npm start` / `yarn dev`
 
 ```
+
 ---
 
 ## Technologies
@@ -83,9 +86,9 @@ Watch a walkthrough (4-5 minutes) of all the major features of this app:
 
 **Wishlist**
 
--View all saved products
+- View all saved products
 
-** Profile **
+**Profile**
 
 - View personal info: username, email, phone, and address
 - Add new addresses
